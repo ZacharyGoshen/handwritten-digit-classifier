@@ -2,6 +2,12 @@ from matplotlib import pyplot as plt
 import numpy as np
 
 def retrieve_image_data(file, image_indices):
+	"""
+	Takes in a file path and an array of indices
+
+	Returns a NumPy matrix of the specified images
+	"""
+
 	# Initialize numpy matrix to store the images
 	images = np.zeros((len(image_indices), 28, 28))
 
