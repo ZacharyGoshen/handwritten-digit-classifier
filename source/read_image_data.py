@@ -1,4 +1,3 @@
-from matplotlib import pyplot as plt
 import numpy as np
 
 def retrieve_image_data(file, image_indices):
@@ -9,23 +8,19 @@ def retrieve_image_data(file, image_indices):
 	"""
 
 	# Initialize numpy matrix to store the images
-	images = np.zeros((len(image_indices), 28, 28))
+	images = np.zeros((len(image_indices), 784))
 
 	with open(file, "rb") as f:
 		# Intialize counters
-		i = 1
-		row = 0
-		col = 0
+		i = 0
+		pixel_number = 0
 		image_number = 0
 		byte_ranges = []
 
-		# Sort image indices
-		image_indices.sort()
-
 		# Calculate the byte index for the beginning and end of each image in the data file
 		for image_index in image_indices:
-			byte_start = 16 + (28 * 28 * image_index) - 1
-			byte_end = byte_start + (28 * 28) - 1
+			byte_start = 16 + (28 * 28 * image_index)
+			byte_end = byte_start + (28 * 28)
 			byte_ranges.append((byte_start, byte_end))
 
 		# Read first byte
@@ -43,28 +38,19 @@ def retrieve_image_data(file, image_indices):
 				# Convert byte value to integer pixel value
 				value = int.from_bytes(byte, "big")
 
-				# Assign each pixel value a location
-				if (col < 27):
-					col += 1
-				else:
-					col = 0
-					row += 1
-
-				# Store pixel value in numpy matrix
-				images[image_number, row, col] = value
+				# Store the normalized pixel value in the NumPy matrix
+				images[image_number, pixel_number] = value
+				pixel_number += 1
 
 				# Read next byte
 				byte = f.read(1)
 				i += 1
 
+			# Standardize data
+			images[image_number] = images[image_number] - np.mean(images[image_number]) / np.std(images[image_number])
+
 			# Reset column and row counters and move to next image
-			col = 0
-			row = 0
+			pixel_number = 0
 			image_number += 1
 
 	return images
-
-images = retrieve_image_data("./../data/train-images.idx3-ubyte", [2, 0])
-for image in images:
-	plt.imshow(image, cmap="gray_r")
-	plt.show()

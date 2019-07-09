@@ -1,4 +1,3 @@
-from matplotlib import pyplot as plt
 import numpy as np
 
 def retrieve_labels(file, label_indices):
@@ -15,9 +14,6 @@ def retrieve_labels(file, label_indices):
 		# Intialize counters
 		i = 0
 		label_number = 0
-
-		# Sort label indices
-		label_indices.sort()
 
 		# Read first byte
 		byte = f.read(1)
@@ -38,6 +34,3 @@ def retrieve_labels(file, label_indices):
 			label_number += 1
 
 	return labels
-
-labels = retrieve_labels("./../data/train-labels.idx1-ubyte", [0, 3, 100])
-print(labels)
