@@ -12,7 +12,7 @@ test_images = retrieve_image_data("./../data/t10k-images.idx3-ubyte", range(0, 1
 test_labels = retrieve_labels("./../data/t10k-labels.idx1-ubyte", range(0, 10000))
 
 # Declare hyperparameters
-learning_rate = .0005
+learning_rate = .0001
 lamb = 0.01
 epochs = 10
 batch_size = 100
