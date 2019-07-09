@@ -7,3 +7,5 @@ The CNN has two convolutional layers and a depth layer. Both convolutional layer
 The image data is contained in binary files. *read_image_data.py* converts the binary image data to NumPy matrices while also flattening and standardizing it. *read_labels.py* converts the binary label data to a NumPy matrix of one hot encodings.
 
 Running *classifier.py* will preprocess the data and build, train, and test the model. Training the model takes about 15 minutes using a standard performance GPU.
+
+MNIST data set was taken from http://yann.lecun.com/exdb/mnist/
