@@ -118,4 +118,4 @@ with tf.compat.v1.Session() as sess:
 		print("Epoch: %d cost = %1.3f" % (epoch + 1, avg_cost))
 
 	# Run test data through model
-	print(sess.run(accuracy, feed_dict = {x : test_images, y : test_labels}))
+	print("Accuracy: %1.4f" % (sess.run(accuracy, feed_dict = {x : test_images, y : test_labels})))
